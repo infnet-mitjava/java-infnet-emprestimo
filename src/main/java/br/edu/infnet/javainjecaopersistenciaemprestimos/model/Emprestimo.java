@@ -28,7 +28,6 @@ public class Emprestimo {
 //	private Coletor coletor;
 //	
 	
-	
 	private Integer idTransacao;
 	private Cliente cliente;
 	private Coletor coletor;

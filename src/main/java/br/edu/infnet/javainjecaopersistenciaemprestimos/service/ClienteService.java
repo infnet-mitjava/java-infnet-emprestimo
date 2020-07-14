@@ -28,4 +28,8 @@ public class ClienteService {
 		clientes.add(cliente);
 	}
 
+	public Cliente getCliente(int parseInt) {
+		return clientes.get(0);
+	}
+
 }
