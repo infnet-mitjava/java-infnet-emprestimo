@@ -21,9 +21,9 @@
 
 				<c:forEach var="cliente" items="${clientes }">
 					<tr>
-						<th scope="row">${cliente.numero }</th>
+						<th scope="row">${cliente.id }</th>
 						<td>${cliente.nome }</td>
-						<td>${cliente.saldo }</td>
+						<td>${cliente.saldoDevedor }</td>
 						<td>${cliente.endereco.estado }</td>
 						<td>${cliente.endereco.cidade }</td>
 						<td>${cliente.endereco.bairro }</td>
@@ -49,8 +49,8 @@
 					aria-describedby="Nome do Cliente" placeholder="Nome do Cliente">
 			</div>
 			<div class="form-group">
-				<label for="saldo">Saldo</label> <input type="text"
-					class="form-control" id="saldo" name="saldo" placeholder="Saldo">
+				<label for="saldo">Saldo Devedor</label> <input type="text"
+					class="form-control" id="saldoDevedor" name="saldoDevedor" placeholder="Saldo">
 			</div>
 			<div class="form-group">
 				<label for="saldo">Estado</label> <input type="text"

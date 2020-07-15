@@ -7,10 +7,25 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Cliente {
+public class Cliente extends Pessoa{
 
-	private Integer numero;
-	private String nome;
-	private Endereco endereco;
-	private double saldo;
+	private Double saldoDevedor;
+	
+	public Cliente(Integer id, String nome, Endereco endereco, Double saldoDevedor) {
+		super(id,nome,endereco);
+		this.saldoDevedor = saldoDevedor;
+	}
+	
+	public void addEmprestimo(Emprestimo emprestimo) {
+		this.getEmprestimos().add(emprestimo);
+		
+		//TODO: CALCULAR JUROS
+		this.saldoDevedor += emprestimo.getMontante();
+		
+	}
+	
+	public void efetuarPagamento(Pagamento pagamento) {
+		this.saldoDevedor -= pagamento.getMontanteAPagar();
+	}
+	
 }

@@ -1,5 +1,6 @@
 package br.edu.infnet.javainjecaopersistenciaemprestimos.model;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -11,28 +12,28 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Emprestimo {
-
 	
-//	private Integer id;
-//	private Date inicio;
-//	private Date fim;
-//	private Double taxaDeJuros;
-//	private Double total;
-//	private Double montanteDevido;
-//	private Integer parcelas; 
-//	private Date vencimento;
-//	
-//	private List<Pagamento> pagamentos;
-//	
-//	private Cliente cliente;
-//	private Coletor coletor;
-//	
-	
-	private Integer idTransacao;
+	private Integer id;
 	private Cliente cliente;
 	private Coletor coletor;
-	private Date data;
+	private Date dataEmprestimo;
+	private Integer diaVencimento;
 	private Double montante;
 	private Double taxaDeJuro;
+	private Integer numeroParcelas;
+	private Integer parcelasPagas;
+	private boolean quitado;
+	
+	private List<Pagamento> pagamentos  = new ArrayList<>();
+	
+	public void addPagamento(Pagamento pagamento) {
+		if(!quitado) {
+			this.pagamentos.add(pagamento);
+			this.parcelasPagas++;
+			if(this.parcelasPagas.equals(numeroParcelas)) {
+				this.quitado = true;
+			}
+		}
+	}
 	
 }

@@ -12,8 +12,7 @@
 					<th scope="col">ID</th>
 					<th scope="col">Cliente</th>
 					<th scope="col">Data</th>
-					<th scope="col">Mês</th>
-					<th scope="col">Valor Pago</th>
+					<th scope="col">Valor</th>
 					<th scope="col">Juros</th>
 					<th scope="col">observacoes</th>
 				</tr>
@@ -25,7 +24,7 @@
 						<th scope="row">${pagamento.id }</th>
 						<td>${emprestimo.cliente.nome }</td>
 						<td>${emprestimo.data }</td>
-						<td>${emprestimo.mesDePagamento }</td>
+						<td>${emprestimo.montanteAPagar }</td>
 						<td>${emprestimo.jurosPagos }</td>
 						<td>${emprestimo.observacoes }</td>
 					</tr>

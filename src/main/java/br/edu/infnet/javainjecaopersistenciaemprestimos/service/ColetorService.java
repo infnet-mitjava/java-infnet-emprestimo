@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import br.edu.infnet.javainjecaopersistenciaemprestimos.model.Coletor;
+import br.edu.infnet.javainjecaopersistenciaemprestimos.model.Endereco;
 
 @Service
 public class ColetorService {
@@ -13,10 +14,11 @@ public class ColetorService {
 private List<Coletor> coletores = new ArrayList<>();
 	
 	public ColetorService () {
-		coletores.add(new Coletor(1 , "Nome Coletor"));
-		coletores.add(new Coletor(2 , "Nome Coletor 2"));
+		
+		coletores.add(new Coletor(1 , "Nome Coletor", new Endereco("RJ", "RJ", "RJ" , "654321","rua tres", "2")));
+		coletores.add(new Coletor(2 , "Nome Coletor 2", new Endereco("RJ", "RJ", "RJ" , "654321","rua tres", "2")));
 	}
-
+	
 	public List<Coletor> getColetores() {
 		return coletores;
 	}
@@ -25,7 +27,7 @@ private List<Coletor> coletores = new ArrayList<>();
 		coletores.add(coletor);
 	}
 
-	public Coletor getColetor(int coletorId) {
+	public Coletor getColetor(Integer coletorId) {
 		return coletores.get(0);
 	}
 

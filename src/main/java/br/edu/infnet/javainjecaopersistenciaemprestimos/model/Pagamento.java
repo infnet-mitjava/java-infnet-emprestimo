@@ -10,22 +10,23 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Pagamento {
-
-	
-//	private Integer id;
-//	private Date data;
-//	private Double montante;
-//	private String observacao;
-//	private TipoPagamento tipoPagamento;
-	
 	
 	private Integer id;
-	private Cliente cliente;
+	private Emprestimo emprestimo;
 	private Date data;
 	
-	//enum?
-	private String mesDePagamento;
-	private Double montantePago;
+	private Double montanteAPagar;
 	private Double jurosPagos;
 	private String observacoes;
+	private boolean pago;
+	
+	public Pagamento(Emprestimo emprestimo, Date data, Double montanteAPagar, Double jurosPagos, String observacoes, boolean pago) {
+		this.emprestimo = emprestimo;
+		this.data = data;
+		this.montanteAPagar = montanteAPagar;
+		this.jurosPagos = jurosPagos;
+		this.observacoes = observacoes;
+		this.pago = pago;
+	}
+	
 }

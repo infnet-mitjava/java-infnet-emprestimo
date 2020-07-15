@@ -44,19 +44,11 @@ public class EmprestimoController {
 	@PostMapping(value = "/")
 	public ModelAndView add(@ModelAttribute Emprestimo emprestimo, @RequestParam String clienteId, @RequestParam String coletorId, @RequestParam String strData) {
 		
-		System.out.println(clienteId);
-		System.out.println(coletorId);
-		System.out.println(strData);
-		
-		emprestimo.setCliente(clienteService.getCliente(Integer.parseInt(clienteId)));
-		
-		emprestimo.setColetor(coletorService.getColetor(Integer.parseInt(coletorId)));
-		
-		emprestimo.setIdTransacao(i++);
+		emprestimo.setId(i++);
+
+		emprestimoService.save(emprestimo, strData, clienteId, coletorId);
 
 		ModelAndView modelAndView = new ModelAndView("principal");
-
-		emprestimoService.save(emprestimo, strData);
 		
 		modelAndView.addObject("clientes", clienteService.getClientes());
 		modelAndView.addObject("coletores", coletorService.getColetores());
