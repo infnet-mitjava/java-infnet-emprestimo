@@ -1,35 +1,30 @@
 package br.edu.infnet.javainjecaopersistenciaemprestimos.service;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.edu.infnet.javainjecaopersistenciaemprestimos.model.Cliente;
-import br.edu.infnet.javainjecaopersistenciaemprestimos.model.Endereco;
+import br.edu.infnet.javainjecaopersistenciaemprestimos.repository.ClienteRepository;
 
 @Service
 public class ClienteService {
 	
-	private List<Cliente> clientes = new ArrayList<>();
+	@Autowired
+	private ClienteRepository clienteRepository;
 	
-	public ClienteService () {
-		clientes.add(new Cliente(2, "Marcos", new Endereco("RJ", "RJ", "RJ" , "654321","rua tres", "2"), 1000.33));
-		clientes.add(new Cliente(1, "Thiago", new Endereco("RJ", "SG", "NEVES" , "123456", "rua dois","1"), 200.33));
-	}
 
 	public List<Cliente> getClientes() {
-		
-		return clientes;
+		return clienteRepository.findAll();
 	}
 
 	public void save(Cliente cliente) {
-		clientes.add(cliente);
+		clienteRepository.save(cliente);
 	}
 
-	public Cliente getCliente(int parseInt) {
-		return clientes.get(0);
+	public Cliente getCliente(int id) {
+		return clienteRepository.findById(id).get();
 	}
 
 }

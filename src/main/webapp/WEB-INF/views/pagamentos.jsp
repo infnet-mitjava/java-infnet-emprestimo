@@ -5,16 +5,50 @@
 
 	<div class="container">
 		<br>
+		<h3>Empréstimo</h3>
+			<table class="table table-striped">
+			<thead>
+				<tr>
+					<th scope="col">ID</th>
+					<th scope="col">Cliente</th>
+					<th scope="col">Coletor</th>
+					<th scope="col">Data</th>
+					<th scope="col">Vencimento</th>
+					<th scope="col">Montante</th>
+					<th scope="col">Juros</th>
+					<th scope="col">Total a pagar</th>
+					<th scope="col">Parcelas</th>
+					<th scope="col">Parcelas Quitadas</th>
+				</tr>
+			</thead>
+			<tbody>
+
+					<tr>
+						<th scope="row">${emprestimo.id }</th>
+						<td>${emprestimo.cliente.nome }</td>
+						<td>${emprestimo.coletor.nome }</td>
+						<td>${emprestimo.dataEmprestimo }</td>
+						<td>${emprestimo.diaVencimento }</td>
+						<td>R$: ${emprestimo.montante }</td>
+						<td>${emprestimo.taxaDeJuro }</td>
+						<td>R$: ${emprestimo.total }</td>
+						<td>${emprestimo.numeroParcelas }</td>
+						<td>${emprestimo.parcelasPagas }</td>
+					</tr>
+
+			</tbody>
+		</table>
+		
 		<h3>Pagamentos</h3>
 		<table class="table table-striped">
 			<thead>
 				<tr>
 					<th scope="col">ID</th>
-					<th scope="col">Cliente</th>
 					<th scope="col">Data</th>
 					<th scope="col">Valor</th>
 					<th scope="col">Juros</th>
 					<th scope="col">observacoes</th>
+					<th scope="col"> - </th>
 				</tr>
 			</thead>
 			<tbody>
@@ -22,11 +56,14 @@
 				<c:forEach var="pagamento" items="${pagamentos }">
 					<tr>
 						<th scope="row">${pagamento.id }</th>
-						<td>${emprestimo.cliente.nome }</td>
-						<td>${emprestimo.data }</td>
-						<td>${emprestimo.montanteAPagar }</td>
-						<td>${emprestimo.jurosPagos }</td>
-						<td>${emprestimo.observacoes }</td>
+						<td>${pagamento.data }</td>
+						<td>${pagamento.montanteAPagar }</td>
+						<td>${pagamento.jurosPagos }</td>
+						<td>${pagamento.observacoes }</td> 
+						<td>
+							<c:if test="${pagamento.pago == true }">Pago</c:if>
+							<c:if test="${pagamento.pago == false }"><a href="/emprestimo/pagamento?pagamentoId=${pagamento.id }">Pagar</a></c:if>
+						</td> 
 					</tr>
 				</c:forEach>
 
@@ -34,59 +71,6 @@
 		</table>
 
 		<br>
-
-		<h3>Novo Pagamento</h3>
-
-		<form method="POST" modelAttribute="pagamento">
-
-			<div class="form-group">
-				<label for="cliente">Cliente</label> <select name="clienteId"
-					class="form-control">
-					<option value="">..</option>
-					<c:forEach var="cliente" items="${clientes}">
-						<option value="${cliente.numero}">${cliente.nome}</option>
-					</c:forEach>
-				</select>
-			</div>
-			
-			<div class="form-group">
-				<label for="nome">Data</label> <input type="date"
-					class="form-control" id="data" name="strData"
-					 placeholder="Data do empréstimo">
-			</div>
-			
-			<div class="form-group">
-				<label for="nome">Mês</label> <input type="text"
-					class="form-control" id="mesDePagamento" name="mesDePagamento"
-					 placeholder="Mês">
-			</div>
-			
-			<div class="form-group">
-				<label for="nome">Taxa de Juro</label> <input type="text"
-					class="form-control" id="montantePago" name="montantePago"
-					 placeholder="Montante Pago">
-			</div>
-			
-			<div class="form-group">
-				<label for="nome">Taxa de Juro</label> <input type="text"
-					class="form-control" id="montantePago" name="montantePago"
-					 placeholder="Montante Pago">
-			</div>
-			
-			<div class="form-group">
-				<label for="nome">Juros Pagos</label> <input type="text"
-					class="form-control" id="jurosPagos" name="jurosPagos"
-					 placeholder="Juros Pago">
-			</div>
-
-			<div class="form-group">
-				<label for="nome">Observações</label> <input type="text"
-					class="form-control" id="observacoes" name="observacoes"
-					 placeholder="Observações">
-			</div>
-
-			<button type="submit" class="btn btn-primary">Cadastrar</button>
-		</form>
 
 
 	</div>

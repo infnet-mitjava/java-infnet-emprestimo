@@ -15,6 +15,7 @@ import br.edu.infnet.javainjecaopersistenciaemprestimos.model.Cliente;
 import br.edu.infnet.javainjecaopersistenciaemprestimos.model.Coletor;
 import br.edu.infnet.javainjecaopersistenciaemprestimos.model.Emprestimo;
 import br.edu.infnet.javainjecaopersistenciaemprestimos.model.Pagamento;
+import br.edu.infnet.javainjecaopersistenciaemprestimos.repository.EmprestimoRepository;
 
 @Service
 public class EmprestimoService {
@@ -28,11 +29,12 @@ public class EmprestimoService {
 	@Autowired
 	private PagamentoService pagamentoService;
 	
-	private List<Emprestimo> emprestimos = new ArrayList<>();
+	@Autowired
+	private EmprestimoRepository emprestimoRepository;
 
-	public List<Emprestimo> getEmprestimos() {
-		return emprestimos;
-	}
+	public void save(Emprestimo emprestimo) {
+		emprestimoRepository.save(emprestimo);
+	} 
 
 	public void save(Emprestimo emprestimo, String strDataEmprestimo, String clienteId, String coletorId) {
 		
@@ -45,18 +47,19 @@ public class EmprestimoService {
 		Coletor coletor = coletorService.getColetor(Integer.parseInt(coletorId));
 		emprestimo.setColetor(coletor);
 		
-		cliente.addEmprestimo(emprestimo);
-		coletor.getEmprestimos().add(emprestimo);
 		
 		Date myDate = criaData(strDataEmprestimo);  
 		
 		emprestimo.setDataEmprestimo(myDate);
 		
-		calculaJuros(emprestimo);
+		Double jurosAOMes = calculaJuros(emprestimo);
+
+		cliente.addEmprestimo(emprestimo);
+		coletor.getEmprestimos().add(emprestimo);
 		
-		emprestimos.add(emprestimo);
+		emprestimoRepository.save(emprestimo);
 		
-		emprestimo.getPagamentos().forEach(p -> System.out.println(p.getData() + " " + p.getMontanteAPagar()));
+		criaPagamentos(emprestimo, jurosAOMes);
 	}
 
 	private void criaPagamentos(Emprestimo emprestimo, Double jurosAOMes) {
@@ -88,17 +91,15 @@ public class EmprestimoService {
 		return cal.getTime();
 	}
 
-	private void calculaJuros(Emprestimo emprestimo) {
+	private Double calculaJuros(Emprestimo emprestimo) {
 		
 		Double jurosAOMes = emprestimo.getMontante() * emprestimo.getTaxaDeJuro();
 		
 		Double jurosTotal =  jurosAOMes * emprestimo.getNumeroParcelas();
 		
-		emprestimo.setMontante( emprestimo.getMontante() + jurosTotal);
+		emprestimo.setTotal( emprestimo.getMontante() + jurosTotal);
 		
-		criaPagamentos(emprestimo, jurosAOMes);
-		
-		
+		return jurosAOMes;
 		
 	}
 
@@ -111,6 +112,14 @@ public class EmprestimoService {
 			myDate = new Date();
 		}
 		return myDate;
+	}
+
+	public Emprestimo getEmprestimo(int emprestimoId) {
+		return emprestimoRepository.findById(emprestimoId).get();
+	}
+
+	public List<Emprestimo> getEmprestimos() {
+		return emprestimoRepository.findAll();
 	}
 	
 

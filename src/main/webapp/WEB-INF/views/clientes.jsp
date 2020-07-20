@@ -49,10 +49,6 @@
 					aria-describedby="Nome do Cliente" placeholder="Nome do Cliente">
 			</div>
 			<div class="form-group">
-				<label for="saldo">Saldo Devedor</label> <input type="text"
-					class="form-control" id="saldoDevedor" name="saldoDevedor" placeholder="Saldo">
-			</div>
-			<div class="form-group">
 				<label for="saldo">Estado</label> <input type="text"
 					class="form-control" id="endereco.estado" name="endereco.estado"
 					placeholder="Estado">

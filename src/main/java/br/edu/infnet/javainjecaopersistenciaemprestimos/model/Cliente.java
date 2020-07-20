@@ -1,9 +1,14 @@
 package br.edu.infnet.javainjecaopersistenciaemprestimos.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@Entity
+@Table(name = "cliente")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -18,9 +23,7 @@ public class Cliente extends Pessoa{
 	
 	public void addEmprestimo(Emprestimo emprestimo) {
 		this.getEmprestimos().add(emprestimo);
-		
-		//TODO: CALCULAR JUROS
-		this.saldoDevedor += emprestimo.getMontante();
+		this.saldoDevedor += emprestimo.getTotal();
 		
 	}
 	

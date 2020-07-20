@@ -25,8 +25,6 @@ public class EmprestimoController {
 	@Autowired
 	private EmprestimoService emprestimoService;
 	
-	static int i = 0;
-	
 	@GetMapping(value = "/")
     public ModelAndView getMainPage() {
 		
@@ -44,8 +42,6 @@ public class EmprestimoController {
 	@PostMapping(value = "/")
 	public ModelAndView add(@ModelAttribute Emprestimo emprestimo, @RequestParam String clienteId, @RequestParam String coletorId, @RequestParam String strData) {
 		
-		emprestimo.setId(i++);
-
 		emprestimoService.save(emprestimo, strData, clienteId, coletorId);
 
 		ModelAndView modelAndView = new ModelAndView("principal");

@@ -1,34 +1,30 @@
 package br.edu.infnet.javainjecaopersistenciaemprestimos.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.edu.infnet.javainjecaopersistenciaemprestimos.model.Coletor;
-import br.edu.infnet.javainjecaopersistenciaemprestimos.model.Endereco;
+import br.edu.infnet.javainjecaopersistenciaemprestimos.repository.ColetorRepository;
 
 @Service
 public class ColetorService {
 
-private List<Coletor> coletores = new ArrayList<>();
+	@Autowired
+	private ColetorRepository coletorRepository;
 	
-	public ColetorService () {
-		
-		coletores.add(new Coletor(1 , "Nome Coletor", new Endereco("RJ", "RJ", "RJ" , "654321","rua tres", "2")));
-		coletores.add(new Coletor(2 , "Nome Coletor 2", new Endereco("RJ", "RJ", "RJ" , "654321","rua tres", "2")));
-	}
-	
+
 	public List<Coletor> getColetores() {
-		return coletores;
+		return coletorRepository.findAll();
 	}
 
 	public void save(Coletor coletor) {
-		coletores.add(coletor);
+		coletorRepository.save(coletor);
 	}
 
-	public Coletor getColetor(Integer coletorId) {
-		return coletores.get(0);
+	public Coletor getColetor(int id) {
+		return coletorRepository.findById(id).get();
 	}
 
 }

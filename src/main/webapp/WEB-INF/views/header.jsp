@@ -46,9 +46,9 @@
       <li class="nav-item">
         <a class="nav-link" href="/emprestimo/clientes">Clientes</a>
       </li>
-        <li class="nav-item">
+       <!--  <li class="nav-item">
         <a class="nav-link" href="/emprestimo/pagamentos">Pagamentos</a>
-      </li>
+      </li> -->
        <li class="nav-item">
         <a class="nav-link" href="/emprestimo/coletores">Coletores</a>
       </li>

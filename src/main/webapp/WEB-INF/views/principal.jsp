@@ -16,9 +16,10 @@
 					<th scope="col">Vencimento</th>
 					<th scope="col">Montante</th>
 					<th scope="col">Juros</th>
+					<th scope="col">Total a pagar</th>
 					<th scope="col">Parcelas</th>
 					<th scope="col">Parcelas Quitadas</th>
-					<th scope="col">Quitado</th>
+					<th scope="col"> - </th>
 				</tr>
 			</thead>
 			<tbody>
@@ -30,11 +31,15 @@
 						<td>${emprestimo.coletor.nome }</td>
 						<td>${emprestimo.dataEmprestimo }</td>
 						<td>${emprestimo.diaVencimento }</td>
-						<td>${emprestimo.montante }</td>
+						<td>R$: ${emprestimo.montante }</td>
 						<td>${emprestimo.taxaDeJuro }</td>
+						<td>R$: ${emprestimo.total }</td>
 						<td>${emprestimo.numeroParcelas }</td>
 						<td>${emprestimo.parcelasPagas }</td>
-						<td>${emprestimo.quitado }</td>
+						<td>
+							<c:if test="${emprestimo.quitado == true }">Quitado</c:if>
+							<c:if test="${emprestimo.quitado == false }"><a href="/emprestimo/pagamentos?emprestimoId=${emprestimo.id}">Pagamento</a></c:if>
+						</td>
 					</tr>
 				</c:forEach>
 

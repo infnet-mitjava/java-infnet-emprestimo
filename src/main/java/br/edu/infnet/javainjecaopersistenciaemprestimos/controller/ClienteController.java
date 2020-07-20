@@ -18,8 +18,6 @@ public class ClienteController {
 
 	@Autowired
 	private ClienteService clienteService;
-	
-	private static int i = 0;
 
 	@GetMapping(value = "/clientes")
 	public ModelAndView getClientes() {
@@ -43,8 +41,6 @@ public class ClienteController {
 	public ModelAndView add(@ModelAttribute Cliente cliente) {
 		
 		ModelAndView modelAndView = new ModelAndView("clientes");
-		
-		cliente.setId(++i);
 
 		clienteService.save(cliente);
 		
